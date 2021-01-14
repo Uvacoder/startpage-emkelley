@@ -1,8 +1,9 @@
 <template>
   <main>
     <nav class="main-nav">
-      <div class="logo" style="color: #ff682c">
-        {{ date }} - {{ hours }}:{{ minutes }}:{{ seconds }} {{ amPm }}
+      <div class="logo">
+        Today is <span class="accent">{{ date }} </span> and it's
+        <span class="accent">{{ hours }}:{{ minutes }} {{ amPm }}</span>
       </div>
       <Burger></Burger>
     </nav>
@@ -81,12 +82,12 @@ export default {
     },
   },
   mounted() {
-    this.interval = setInterval(this.updateClock, 1000);
-  },
-  beforeDestroy() {
-    clearInterval(this.interval);
+    this.startUpdate();
   },
   methods: {
+    startUpdate() {
+      setInterval(this.updateClock, 1000);
+    },
     updateClock() {
       this.hours = date.getHours();
       this.minutes = date.getMinutes();
@@ -126,6 +127,9 @@ main {
   color: #fff;
   font-weight: bold;
   font-family: "Lato";
+  .accent {
+    color: #ff682c;
+  }
 }
 
 .main-nav {
