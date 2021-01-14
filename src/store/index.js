@@ -17,30 +17,6 @@ export default new Vuex.Store({
           name: "MDN",
           url: "https://developer.mozilla.org/en-US/",
         },
-        {
-          name: "Googleasdfas",
-          url: "https://www.google.com/",
-        },
-        {
-          name: "Google",
-          url: "https://www.google.com/",
-        },
-        {
-          name: "Google",
-          url: "https://www.google.com/",
-        },
-        {
-          name: "Google",
-          url: "https://www.google.com/",
-        },
-        {
-          name: "Google",
-          url: "https://www.google.com/",
-        },
-        {
-          name: "Google",
-          url: "https://www.google.com/",
-        },
       ],
     },
   },

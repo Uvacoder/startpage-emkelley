@@ -34,7 +34,7 @@ export default {
 .slide-enter,
 .slide-leave-to {
   transform: translateX(-100%);
-  transition: all 150ms ease-in 0s;
+  transition: all 550ms ease-in 0s;
 }
 
 .sidebar-backdrop {
@@ -44,6 +44,9 @@ export default {
   top: 0;
   left: 0;
   cursor: pointer;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .sidebar-panel {

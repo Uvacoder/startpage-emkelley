@@ -22,7 +22,8 @@ export default {
   methods: {
     getFavicon(url) {
       const URLObject = new URL(url);
-      return `${URLObject.protocol}${URLObject.hostname}/favicon.ico`;
+      console.log(`${URLObject.protocol}//${URLObject.hostname}/favicon.ico`);
+      return `${URLObject.protocol}//${URLObject.hostname}/favicon.ico`;
     },
     goToURL(url) {
       window.location.replace(url);
