@@ -1,11 +1,9 @@
 <template>
   <div class="sidebar" v-if="isNavOpen">
     <div class="sidebar-backdrop" @click="toggle"></div>
-    <transition name="slide">
-      <div class="sidebar-panel">
-        <slot></slot>
-      </div>
-    </transition>
+    <div class="sidebar-panel">
+      <slot></slot>
+    </div>
   </div>
 </template>
 <script>
@@ -26,17 +24,6 @@ export default {
 };
 </script>
 <style>
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.2s ease;
-}
-
-.slide-enter,
-.slide-leave-to {
-  transform: translateX(-100%);
-  transition: all 550ms ease-in 0s;
-}
-
 .sidebar-backdrop {
   width: 100vw;
   height: 100vh;
@@ -44,8 +31,6 @@ export default {
   top: 0;
   left: 0;
   cursor: pointer;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.5);
 }
 

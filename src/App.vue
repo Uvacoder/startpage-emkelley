@@ -10,7 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background: #2c3e50;
+  background: #000000;
   min-height: 100vh;
 }
 // Import Bulma's core
@@ -21,10 +21,16 @@
 $primary: #ff682c;
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
-$primary-invert: findColorInvert($primary);
+$secondary: hsl(209, 38%, 10%);
+$secondary-light: findLightColor($secondary);
+$secondary-dark: findDarkColor($secondary);
+$secondary-invert: findColorInvert($secondary);
 $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);
-
+$input-color: ghostwhite;
+$input-background-color: hsl(209, 38%, 10%);
+$input-border-color: hsl(208, 34%, 14%);
+$input-placeholder-color: rgba(248, 248, 255, 0.25);
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
@@ -53,6 +59,12 @@ $colors: mergeColorMaps(
       $primary-invert,
       $primary-light,
       $primary-dark,
+    ),
+    "secondary": (
+      $secondary,
+      $secondary-invert,
+      $secondary-light,
+      $secondary-dark,
     ),
     "link": (
       $link,

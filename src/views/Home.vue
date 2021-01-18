@@ -2,16 +2,13 @@
   <main>
     <nav class="main-nav">
       <div class="logo">
-        Today is <span class="accent">{{ date }} </span> and it's
-        <span class="accent">{{ hours }}:{{ minutes }} {{ amPm }}</span>
+        <span class="accent">{{ date }} </span>
       </div>
       <Burger></Burger>
     </nav>
-    <transition name="fade">
-      <Sidebar>
-        <h1 class="title">Startpage Settings</h1>
-      </Sidebar>
-    </transition>
+    <Sidebar>
+      <h1 class="title">Startpage Settings</h1>
+    </Sidebar>
     <section class="hero is-medium">
       <div class="hero-body">
         <div class="container has-text-centered">
@@ -31,7 +28,18 @@
             </div>
             <div class="level-right">
               <div class="level-item">
-                <button class="button is-primary is-outlined">Add Link</button>
+                <b-input
+                  v-model="addLinkURL"
+                  placeholder="https://google.com"
+                ></b-input>
+              </div>
+              <div class="level-item">
+                <button
+                  @click="getLinkTitle"
+                  class="button is-secondary is-rounded"
+                >
+                  <i class="far fa-plus"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -54,12 +62,11 @@ export default {
   name: "Home",
   data() {
     return {
-      show: true,
-      hours: date.getHours(),
-      minutes: date.getMinutes(),
-      seconds: date.getSeconds(),
-      amPm: "AM",
-      interval: 0,
+      newLinkModal: false,
+      addLinkURL: "",
+      h: "",
+      m: "",
+      s: "",
     };
   },
   components: {
@@ -82,20 +89,41 @@ export default {
     },
   },
   mounted() {
-    this.startUpdate();
+    setInterval(this.updateClock, 100);
   },
   methods: {
-    startUpdate() {
-      setInterval(this.updateClock, 1000);
+    updateClock: function() {
+      let now = new Date();
+      this.h = this.leftPad("" + now.getHours());
+      this.m = this.leftPad("" + now.getMinutes());
+      this.s = this.leftPad("" + now.getSeconds());
     },
-    updateClock() {
-      this.hours = date.getHours();
-      this.minutes = date.getMinutes();
-      this.seconds = date.getSeconds();
-      this.amPm = this.hours >= 12 ? "PM" : "AM";
-      this.hours = this.hours % 12 || 12;
-      this.minutes = this.minutes < 10 ? 0 + this.minutes : this.minutes;
-      this.hours = this.hours < 10 ? 0 + this.hours : this.hours;
+    leftPad: function(str) {
+      const leftPad = "00";
+      return leftPad.substring(0, leftPad.length - str.length) + str;
+    },
+    getLinkTitle() {
+      const key = btoa(process.env.URL_META_API_KEY);
+      const url = "//api.urlmeta.org/?url=" + this.addLinkURL;
+      this.axios
+        .get(url, {
+          headers: {
+            Authorization: `Basic ${key}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          // this.addLinkToState(response.data);
+        });
+    },
+    addLinkToState(apiTitle) {
+      const url = this.addLinkURL;
+      const linkObject = {
+        name: apiTitle,
+        url: url,
+      };
+      console.log(linkObject);
+      this.$store.commit("addNewLink", linkObject);
     },
   },
 };
@@ -111,11 +139,11 @@ export default {
 }
 main {
   background-color: #162431;
-  height: 100vh;
+  min-height: 100vh;
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.1s;
 }
 .fade-enter,
 .fade-leave-to {
@@ -131,7 +159,6 @@ main {
     color: #ff682c;
   }
 }
-
 .main-nav {
   display: flex;
   justify-content: space-between;
@@ -151,5 +178,8 @@ ul.sidebar-panel-nav > li > a {
 }
 hr {
   opacity: 0.5 !important;
+}
+.asdf {
+  background: white;
 }
 </style>

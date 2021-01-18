@@ -10,12 +10,14 @@ export default new Vuex.Store({
       name: "Eric",
       links: [
         {
-          name: "Google",
-          url: "https://www.google.com/",
+          id: "157138f4-a111-4b99-a92f-3ce95d1cc434",
+          name: "YouTube",
+          url: "https://www.youtube.com/feed/subscriptions?flow=2",
         },
         {
-          name: "MDN",
-          url: "https://developer.mozilla.org/en-US/",
+          id: "a7872dd1-9849-4e39-ac0d-b315feb67d0f",
+          name: "Reddit",
+          url: "https://www.reddit.com/r/popular/",
         },
       ],
     },
