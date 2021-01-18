@@ -27,18 +27,26 @@
               </div>
             </div>
             <div class="level-right">
-              <div class="level-item">
-                <b-input v-model="addLinkName" placeholder="Google"></b-input>
-              </div>
-              <div class="level-item">
+              <div v-if="addLinkForm" class="level-item">
                 <b-input
-                  v-model="addLinkURL"
-                  placeholder="https://google.com"
+                  v-model="addLinkName"
+                  placeholder="Link Name"
                 ></b-input>
+              </div>
+              <div v-if="addLinkForm" class="level-item">
+                <b-input v-model="addLinkURL" placeholder="Link URL"></b-input>
+              </div>
+              <div v-if="addLinkForm" class="level-item">
+                <button
+                  @click="addLinkToState"
+                  class="button is-primary is-rounded"
+                >
+                  Add
+                </button>
               </div>
               <div class="level-item">
                 <button
-                  @click="addLinkToState"
+                  @click="toggleAddLinkForm"
                   class="button is-secondary is-rounded"
                 >
                   <i class="far fa-plus"></i>
@@ -66,6 +74,7 @@ export default {
   name: "Home",
   data() {
     return {
+      addLinkForm: false,
       newLinkModal: false,
       addLinkURL: undefined,
       addLinkName: undefined,
@@ -135,6 +144,9 @@ export default {
       console.log(linkObject);
       this.$store.commit("addNewLink", linkObject);
     },
+    toggleAddLinkForm() {
+      this.addLinkForm = !this.addLinkForm;
+    },
   },
 };
 </script>
@@ -151,9 +163,6 @@ export default {
   }
 }
 .level-item {
-  .button {
-    color: #ff682c;
-  }
   .title {
     font-weight: 300;
     font-size: 1rem;
