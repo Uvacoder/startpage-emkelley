@@ -28,6 +28,9 @@
             </div>
             <div class="level-right">
               <div class="level-item">
+                <b-input v-model="addLinkName" placeholder="Google"></b-input>
+              </div>
+              <div class="level-item">
                 <b-input
                   v-model="addLinkURL"
                   placeholder="https://google.com"
@@ -35,7 +38,7 @@
               </div>
               <div class="level-item">
                 <button
-                  @click="getLinkTitle"
+                  @click="addLinkToState"
                   class="button is-secondary is-rounded"
                 >
                   <i class="far fa-plus"></i>
@@ -64,7 +67,8 @@ export default {
   data() {
     return {
       newLinkModal: false,
-      addLinkURL: "",
+      addLinkURL: undefined,
+      addLinkName: undefined,
       h: "",
       m: "",
       s: "",
@@ -114,18 +118,19 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response);
           this.addLinkToState(response.data.title);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           this.addLinkToState(this.addLinkURL);
         });
     },
-    addLinkToState(apiTitle) {
-      const url = this.addLinkURL;
+    addLinkToState() {
       const linkObject = {
         id: uuid,
-        name: apiTitle,
-        url: url,
+        name: this.addLinkName || this.addLinkURL,
+        url: this.addLinkURL,
       };
       console.log(linkObject);
       this.$store.commit("addNewLink", linkObject);
