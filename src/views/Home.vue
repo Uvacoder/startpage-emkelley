@@ -115,6 +115,9 @@ export default {
         })
         .then((response) => {
           this.addLinkToState(response.data.title);
+        })
+        .catch(() => {
+          this.addLinkToState(this.addLinkURL);
         });
     },
     addLinkToState(apiTitle) {
