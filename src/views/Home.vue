@@ -105,7 +105,7 @@ export default {
     getLinkTitle() {
       const key = btoa(process.env.URL_META_API_KEY);
       const url =
-        "http://url-metadata.herokuapp.com/api/metadata?url=" + this.addLinkURL;
+        "//url-metadata.herokuapp.com/api/metadata?url=" + this.addLinkURL;
       this.axios
         .get(url, {
           headers: {
