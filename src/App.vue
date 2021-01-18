@@ -10,13 +10,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background: #000000;
+  background: radial-gradient(#162431, hsl(209, 38%, 10%));
   min-height: 100vh;
 }
 // Import Bulma's core
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
-
 // Set your colors
 $primary: #ff682c;
 $primary-light: findLightColor($primary);

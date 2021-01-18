@@ -9,7 +9,7 @@
     <Sidebar>
       <h1 class="title">Startpage Settings</h1>
     </Sidebar>
-    <section class="hero is-medium">
+    <section class="hero">
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">{{ greeting }}, {{ user.name }}</h1>
@@ -56,6 +56,7 @@ import Burger from "@/components/menu/Burger";
 import Sidebar from "@/components/menu/ConfigSidebar";
 import QuickLinks from "@/components/QuickLinks";
 import { mapGetters } from "vuex";
+import { uuid } from "uuidv4";
 
 const date = new Date();
 export default {
@@ -113,13 +114,13 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
-          // this.addLinkToState(response.data);
+          this.addLinkToState(response.data.title);
         });
     },
     addLinkToState(apiTitle) {
       const url = this.addLinkURL;
       const linkObject = {
+        id: uuid,
         name: apiTitle,
         url: url,
       };
@@ -135,11 +136,26 @@ export default {
 }
 .hero,
 .main-nav {
-  background: hsl(209, 38%, 10%);
+  background: transparent;
   user-select: none;
+  .title {
+    font-weight: 300;
+  }
+}
+.level-item {
+  .button {
+    color: #ff682c;
+  }
+  .title {
+    font-weight: 300;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: #ff682c;
+  }
 }
 main {
-  background-color: #162431;
+  background: radial-gradient(#162431, hsl(209, 38%, 10%));
   min-height: 100vh;
 }
 .fade-enter-active,
