@@ -191,6 +191,8 @@ main {
   font-family: "Lato";
   .accent {
     color: #ff682c;
+    font-weight: 300 !important;
+    letter-spacing: 0.05rem;
   }
 }
 .main-nav {
